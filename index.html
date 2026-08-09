@@ -920,35 +920,50 @@
 
 
   /* ---------- Hero ---------- */
+  /* He stands in the left third of the plate and faces camera, so the type is set
+     right of him rather than centred over him. The veil is graded left-to-right:
+     light where his face is, heavy under the headline so white type holds contrast
+     against a bright cath lab. */
   .jv-hero { position:relative; height:100vh; min-height:560px; overflow:hidden;
-             display:flex; align-items:center; justify-content:center; background:#0c1018; }
-  /* The cath-lab photograph is dark by design (the centre had to stay clear for the
-     headline), but the old radial veil was darkest at the edges, which is exactly
-     where he is standing. Lift the plate slightly and grade the veil left-to-right
-     so his face reads while the headline keeps its contrast. */
-  .jv-hero-bg { position:absolute; inset:-4%; background:url('speaker/img/slider-img.jpg') center center/cover no-repeat;
-                filter: brightness(1.26) saturate(1.04);
+             display:flex; align-items:center; justify-content:flex-end; background:#0c1018; }
+  .jv-hero-bg { position:absolute; inset:-4%; background:url('speaker/img/slider-img.jpg') center 18%/cover no-repeat;
+                filter: saturate(1.03) contrast(1.03);
                 animation: jv-kenburns 26s ease-in-out infinite alternate; will-change:transform; }
   .jv-hero-veil { position:absolute; inset:0;
-      background:linear-gradient(90deg, rgba(8,11,18,.10) 0%, rgba(8,11,18,.26) 22%,
-                 rgba(8,11,18,.64) 46%, rgba(8,11,18,.70) 78%, rgba(8,11,18,.74) 100%); }
+      background:linear-gradient(90deg, rgba(8,11,18,.14) 0%, rgba(8,11,18,.24) 22%,
+                 rgba(8,11,18,.58) 36%, rgba(8,11,18,.80) 52%, rgba(8,11,18,.84) 100%); }
+  @media (max-width: 991px) {
+    /* Narrower crops pull him toward the middle, so centre the type again and
+       scrim vertically instead of horizontally. */
+    .jv-hero { justify-content:center; }
+    .jv-hero-veil { background:linear-gradient(180deg, rgba(8,11,18,.50) 0%, rgba(8,11,18,.72) 50%, rgba(8,11,18,.84) 100%); }
+  }
   @media (max-width: 767px) {
-    /* Portrait crop pushes him off-frame, so the graded veil has nothing to protect. */
-    .jv-hero-veil { background:linear-gradient(180deg, rgba(8,11,18,.55) 0%, rgba(8,11,18,.74) 55%, rgba(8,11,18,.82) 100%); }
+    /* A phone-width cover crop keeps only the middle ~28% of the plate, which is
+       equipment, not him. Pull the focal point left so he stays in frame. */
+    .jv-hero-bg { background-position: 21% 16%; }
   }
   @keyframes jv-kenburns {
     0%   { transform: scale(1.00) translate3d(0,0,0); }
-    100% { transform: scale(1.14) translate3d(-1.6%,-1.2%,0); }
+    100% { transform: scale(1.07) translate3d(-1.1%,-0.8%,0); }
   }
-  .jv-hero-inner { position:relative; z-index:2; text-align:center; padding:0 24px; max-width:920px;
+  .jv-hero-inner { position:relative; z-index:2; text-align:left; padding:0 24px; max-width:660px;
+                   width:52%; margin-right:5vw;
                    transition: transform .5s cubic-bezier(.22,.61,.36,1); }
+  @media (max-width: 991px) {
+    .jv-hero-inner { text-align:center; width:auto; max-width:920px; margin-right:0; }
+  }
   .jv-kicker { color:#c3ccdf; font-size:15px; letter-spacing:.14em; margin:0 0 22px; font-weight:500; }
   .jv-name   { color:#fff; font-size:clamp(38px,7.2vw,74px); font-weight:700; line-height:1.05;
                letter-spacing:-.02em; margin:0 0 26px; font-family:'Montserrat',sans-serif; }
   .jv-sub    { color:#dfe4ee; font-size:clamp(15px,1.5vw,19px); line-height:1.75; font-weight:300;
-               max-width:760px; margin:0 auto; }
-  .jv-cue { display:block; width:26px; height:52px; margin:46px auto 0; border:1px solid rgba(255,255,255,.4);
+               max-width:760px; margin:0; }
+  .jv-cue { display:block; width:26px; height:52px; margin:46px 0 0; border:1px solid rgba(255,255,255,.4);
             border-radius:16px; position:relative; }
+  @media (max-width: 991px) {
+    .jv-sub { margin:0 auto; }
+    .jv-cue { margin:46px auto 0; }
+  }
   .jv-cue-line { position:absolute; left:50%; top:9px; width:2px; height:9px; margin-left:-1px; border-radius:2px;
                  background:#fff; animation: jv-cue 1.9s ease-in-out infinite; }
   @keyframes jv-cue { 0%{opacity:0;transform:translateY(0)} 30%{opacity:1} 100%{opacity:0;transform:translateY(20px)} }
