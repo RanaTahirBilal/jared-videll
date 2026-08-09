@@ -922,10 +922,20 @@
   /* ---------- Hero ---------- */
   .jv-hero { position:relative; height:100vh; min-height:560px; overflow:hidden;
              display:flex; align-items:center; justify-content:center; background:#0c1018; }
+  /* The cath-lab photograph is dark by design (the centre had to stay clear for the
+     headline), but the old radial veil was darkest at the edges, which is exactly
+     where he is standing. Lift the plate slightly and grade the veil left-to-right
+     so his face reads while the headline keeps its contrast. */
   .jv-hero-bg { position:absolute; inset:-4%; background:url('speaker/img/slider-img.jpg') center center/cover no-repeat;
+                filter: brightness(1.26) saturate(1.04);
                 animation: jv-kenburns 26s ease-in-out infinite alternate; will-change:transform; }
   .jv-hero-veil { position:absolute; inset:0;
-      background:radial-gradient(120% 90% at 50% 45%, rgba(8,11,18,.34) 0%, rgba(8,11,18,.78) 62%, rgba(8,11,18,.92) 100%); }
+      background:linear-gradient(90deg, rgba(8,11,18,.10) 0%, rgba(8,11,18,.26) 22%,
+                 rgba(8,11,18,.64) 46%, rgba(8,11,18,.70) 78%, rgba(8,11,18,.74) 100%); }
+  @media (max-width: 767px) {
+    /* Portrait crop pushes him off-frame, so the graded veil has nothing to protect. */
+    .jv-hero-veil { background:linear-gradient(180deg, rgba(8,11,18,.55) 0%, rgba(8,11,18,.74) 55%, rgba(8,11,18,.82) 100%); }
+  }
   @keyframes jv-kenburns {
     0%   { transform: scale(1.00) translate3d(0,0,0); }
     100% { transform: scale(1.14) translate3d(-1.6%,-1.2%,0); }
